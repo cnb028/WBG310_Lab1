@@ -1,0 +1,153 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>JavaScript Exercises</title>
+<style type="text/css">
+body {
+	font-family:Verdana, Geneva, sans-serif; 
+	font-size:100%;
+	margin:0;
+	padding:0;
+}
+    p {
+        color: #212121;
+        margin-left: 20px;
+    }
+div#results {
+	background-color:#FF6;
+	height:auto;
+	width:500px;
+	border:1px solid red;
+	padding:10px;
+	margin-left:20px;
+	-moz-box-shadow: 10px 10px 5px #888;
+	-webkit-box-shadow: 10px 10px 5px #888;
+	box-shadow: 10px 10px 5px #888;
+	border-radius:7px;
+
+}
+    div#more {
+        background-color: #9E9E9E;
+        height: auto;
+        width: 500px;
+        border: 1px solid #036;
+        padding: 10px;
+        margin-left: 20px;
+        margin-top: 20px;
+        -moz-box-shadow: 10px 10px 5px #888;
+        -webkit-box-shadow: 10px 10px 5px #888;
+        box-shadow: 10px 10px 5px #888;
+        color: #FFFFFF;
+    }
+    #form1 {
+        padding: 10px;
+        width: 500px;
+        border-style: solid;
+        border-color: #212121;
+        border-radius: 15px;
+        -moz-box-shadow: 10px 10px 5px #888;
+        -webkit-box-shadow: 10px 10px 5px #888;
+        box-shadow: 10px 10px 5px #888;
+        background-color: #E53935;
+        margin: 20px;
+    }
+</style>
+<script type="text/javascript">
+	function validateForm() {
+		//alert("Success");
+
+		var name = document.getElementById("name").value
+		var age = document.getElementById("age").value
+
+		//alert("Name= " + name + " Age= " + age);
+
+		if (name == "" || name == null) {
+			resultsMsg("Hey what's shakin? Name's Blaster, what's about you?");
+		}
+		else {
+			//alert("Thank you " + name);
+			if (age == "" || age == null || isNaN(age)) {
+				resultsMsg("Now I know ya have an age, right?");
+			}else if (age < 2 || age > 113) {
+				resultsMsg("Ya being funny here. Come on now, what is your age really?");
+            }else {
+                //alert("Thanks " + name + ". " + "You are " + age + ", yeah right!");
+				if (!getSkill()) {
+					resultsMsg("Yo, what do ya do? I'm a communication expert and a DJ on the weekends!");
+				}else {
+					moreMsg("Wow! You're a " + getSkill() + "! That's rad!");
+                }//end else
+            }//end else
+		}//end else
+	}//end function validateForm()
+
+	function getSkill() {
+
+		var isChecked = false; //assume no button has been clicked
+		var theSelection;
+		var skills = document.getElementsByName("skillset");
+
+		for (var i = 0; i < skills.length; i++) {
+			if (skills[i].checked) { //checks for attribute being true
+				isChecked = true;
+				theSelection = skills[i].value;
+				break; //leave the loop since only one can be checked
+            }//end if
+        }//end for
+		if (isChecked) {
+			return theSelection;
+		} else {
+			return false;
+        }//end else
+
+	}//end function getSkill()
+
+	function resultsMsg(s) {
+		var resultsBox = document.getElementById("results");
+		//reset to blank by overwriting
+		resultsBox.innerHTML = s;
+	}// end function
+
+	function moreMsg(s) {
+		var moreBox = document.getElementById("more");
+		//reset to blank by overwriting
+		moreBox.innerHTML = s;
+    }
+
+</script>
+</head>
+
+<body>
+
+<p>First Paragraph</p>
+<p>Second Paragraph</p>
+<form name="form1" id="form1" action="" method="post">
+
+	<label>
+		First Name:
+		<input type="text" id="name" name="name">
+	</label>
+	<br> <!--new line here-->
+	<label>
+		Your Age: &nbsp;
+		<input type="text" id="age" name="age">
+	</label>
+	<br><!--new line here-->
+	<input type="radio" name="skillset" value="Designer">Designer<br>
+	<input type="radio" name="skillset" value="Developer">Developer<br>
+	<input type="radio" name="skillset" value="Programmer">Programmer<br>
+	<input type="radio" name="skillset" value="Artist">Artist<br>
+
+	<input type="button" value="Submit" onclick="validateForm()"/> &nbsp; &nbsp; <input type="reset" value="Clear Form" />
+
+</form>
+
+
+<form name="form1" id="form1" action="" method="post">
+
+</form>
+<div id="results"></div>
+<div id="more">Waiting for what your name, age, and what ya do!</div>
+</body>
+</html>
